@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+bool is_arithmetic_progression(unsigned long n) {
+    unsigned char *bytes = (unsigned char *)&n;
+    int diff = bytes[1] - bytes[0];
+    
+    for (int i = 2; i < sizeof(unsigned long); i++) {
+        if (bytes[i] - bytes[i-1] != diff) {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main() {
+    unsigned long n;
+    printf("Введите длинное целое число в шестнадцатеричном формате: ");
+    scanf("%lx", &n);
+    
+    if (is_arithmetic_progression(n)) {
+        printf("Байты числа составляют арифметическую прогрессию.\n");
+    } else {
+        printf("Байты числа НЕ составляют арифметическую прогрессию.\n");
+    }
+    
+    return 0;
+}
