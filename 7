@@ -1,29 +1,29 @@
 #include <stdio.h>
 #include <stdint.h>
-	
+
 int count_ones(uint8_t byte) {
-    int count = 0;
-	for (int i = 0; i < 8; i++) {
-        if (byte & (1 << i)) {            
-            count++;
-	    }
-	}
-	return count;
+ int count = 0;
+ for (int i = 0; i < 8; i++) {
+ if (byte & (1 << i)) {
+ count++;
+ }
+ }
+ return count;
 }
-	
+
 int main() {
-    uint64_t N;
-	printf("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ‡Ð¸ÑÐ»Ð¾ N (Ð² 16-Ñ€Ð¸Ñ‡Ð½Ð¾Ð¼ Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ðµ, Ð½Ð°Ð¿Ñ€Ð¸Ð¼ÐµÑ€, 0xAABBCCDD): ");
-	scanf("%llx", &N); 
-	uint64_t result = 0;
-	
-    for (int i = 0; i < sizeof(N); i++) {
-        uint8_t byte = (N >> (8 * i)) & 0xFF;
-	
-	    if (count_ones(byte) >= 4) {
-	        result |= (uint64_t)byte << (8 * i); 
-	    }
-    }
-    printf("Ð ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚: 0x%016llX\n", result);
-    return 0;
+ uint64_t N;
+ printf("Введите число N (в 16-ричном формате, например, 0xAABBCCDD): ");
+ scanf("%llx", &N);
+ uint64_t result = 0;
+
+ for (int i = 0; i < sizeof(N); i++) {
+ uint8_t byte = (N >> (8 * i)) & 0xFF;
+
+ if (count_ones(byte) >= 4) {
+ result |= (uint64_t)byte << (8 * i);
+ }
+ }
+ printf("Результат: 0x%016llX\n", result);
+ return 0;
 }
